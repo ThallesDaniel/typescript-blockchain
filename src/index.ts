@@ -1,14 +1,17 @@
-import { BlockChain } from './blockchain'
+import { Blockchain } from './blockchain';
 
-const blockchain = new BlockChain(Number(process.argv[2] || 4))
-const blockNumber = +process.argv[3] || 10
+const difficulty = Number(process.argv[2]) || 4;
+const blockchain = new Blockchain(difficulty);
+
+
+const numBlocks = Number(process.argv[3]) || 10;
 let chain = blockchain.chain
 
-for (let i = 1; i <= blockNumber; i++) {
-  const block = blockchain.createBlock(`Block ${i}`)
-  const mineInfo = blockchain.mineBlock(block)
-  chain = blockchain.pushBlock(mineInfo.minedBlock)
+for(let i = 1; i <= numBlocks; i++){
+    const block = blockchain.creatBlock(`Bloco ${i}`);
+    const mineInfo = blockchain.minerBlock(block);
+    chain = blockchain.sendBlock(mineInfo.blockMined);
 }
 
-console.log('--- GENERATED CHAIN ---\n')
+console.log('---------BLOCKCHAIN---------');
 console.log(chain)
